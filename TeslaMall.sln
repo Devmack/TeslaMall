@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeslaMall.Server", "TeslaMall.Server\TeslaMall.Server.csproj", "{0323E954-3EC8-40D8-AD7B-94F618910897}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "teslamall.client", "teslamall.client\teslamall.client.esproj", "{A86651CB-4E9B-4994-9A32-5F73E52066FD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0323E954-3EC8-40D8-AD7B-94F618910897}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0323E954-3EC8-40D8-AD7B-94F618910897}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0323E954-3EC8-40D8-AD7B-94F618910897}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0323E954-3EC8-40D8-AD7B-94F618910897}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A86651CB-4E9B-4994-9A32-5F73E52066FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A86651CB-4E9B-4994-9A32-5F73E52066FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A86651CB-4E9B-4994-9A32-5F73E52066FD}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{A86651CB-4E9B-4994-9A32-5F73E52066FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A86651CB-4E9B-4994-9A32-5F73E52066FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A86651CB-4E9B-4994-9A32-5F73E52066FD}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {15E8E62D-5E5F-4E26-A44E-DCCBED534B38}
+	EndGlobalSection
+EndGlobal
