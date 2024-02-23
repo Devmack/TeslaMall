@@ -17,16 +17,11 @@ public record CarDTO : BaseDTO
 
     public Guid? RelatedLocationId { get; init; }
 
-    public LocationDTO? RelatedLocation { get; init; }
-
     public Guid? RelatedReservationId { get; init; }
 
-    public ReservationDTO? RelatedReservation { get; init; }
 
-    public CarDTO(Guid id, string modelName, LocationDTO? relatedLocation, ReservationDTO? relatedReservation) : base(id)
+    public CarDTO(Guid id, string modelName) : base(id)
     {
         ModelName = modelName;
-        RelatedLocation = relatedLocation;
-        RelatedReservation = relatedReservation;
     }
 }

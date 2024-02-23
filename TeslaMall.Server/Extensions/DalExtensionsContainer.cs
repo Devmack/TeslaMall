@@ -11,7 +11,8 @@ public static class DalExtensionsContainer
     public static void InjectDAL(this IServiceCollection services)
     {
         services.AddDbContext<TeslaMallContext>();
+        services.AddTransient<IReservationRepository, ReservationRepository>();
         services.AddScoped<IRentCalculatorService, RentCalculatorServices>();
-        services.AddScoped<IReservationRepository, ReservationRepository>();
+        services.AddScoped<IlocationRepository, LocationRepository>();
     }
 }

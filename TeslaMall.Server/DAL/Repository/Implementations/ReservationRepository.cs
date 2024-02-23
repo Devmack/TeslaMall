@@ -5,7 +5,7 @@ using TeslaMall.Server.Models;
 
 namespace TeslaMall.Server.DAL.Repository.Implementations;
 
-public class ReservationRepository : IReservationRepository
+public sealed class ReservationRepository : IReservationRepository
 {
     private readonly TeslaMallContext ctx;
 
@@ -15,7 +15,7 @@ public class ReservationRepository : IReservationRepository
     }
     public async Task<bool> AddAsync(Reservation reservation)
     {
-        await ctx.AddAsync(reservation);
+        await ctx.Reservations.AddAsync(reservation);
         return await ChangeDatabaseAsync();
     }
 
@@ -36,9 +36,19 @@ public class ReservationRepository : IReservationRepository
         return await ctx.Reservations.ToListAsync();
     }
 
-    public async Task<Reservation> GetSingleAsync(int id)
+    public async Task<Reservation> GetSingleAsync(Guid id)
     {
         return await ctx.Reservations.FirstAsync(e => e.Id.Equals(id));
+    }
+
+    public async Task<bool> RemoveAsync(Reservation model)
+    {
+        var targetFound = await GetSingleAsync(model.Id);
+        if (targetFound != null)
+        {
+            await ChangeDatabaseAsync();
+        }
+        throw new Exception("Model with given id does not exists");
     }
 
     private async Task<bool> ChangeDatabaseAsync()
