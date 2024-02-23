@@ -12,8 +12,12 @@ public class TeslaMallContext : DbContext
     public DbSet<ReservationPeriod> ReservationPeriods { get; set; }
     public DbSet<Location> RentalLocations { get; set; }
 
-    public TeslaMallContext(){}
-    public TeslaMallContext(DbContextOptions<TeslaMallContext> options) : base(options) {}
+    public TeslaMallContext(){
+        Database.EnsureCreated();
+    }
+    public TeslaMallContext(DbContextOptions<TeslaMallContext> options) : base(options) {
+        Database.EnsureCreated();
+    }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
