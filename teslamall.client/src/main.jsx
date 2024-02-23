@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import './index.css'
 import LocationPage from './pages/LocationPage.jsx';
+import ReservationPage from './pages/ReservationPage.jsx';
 
 const router = createBrowserRouter([
     {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
     {
         path: "/RentLocations",
         element: <LocationPage></LocationPage>,
+    },
+    {
+        path: "/Reservation",
+        element: <ReservationPage></ReservationPage>,
     },
 ]);
 
