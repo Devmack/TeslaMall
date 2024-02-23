@@ -41,12 +41,12 @@ export default defineConfig({
     plugins: [plugin()],
     resolve: {
         alias: {
-            '@': fileURLToPath(new URL('./src', import.meta.url))
+            '@': fileURLToPath(new URL('./src/**/*', import.meta.url))
         }
     },
     server: {
         proxy: {
-            '^/weatherforecast': {
+            '^/Locations': {
                 target: 'https://localhost:7249/',
                 secure: false
             }

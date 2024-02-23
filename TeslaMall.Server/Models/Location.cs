@@ -5,6 +5,7 @@ namespace TeslaMall.Server.Models;
 public sealed class Location : BaseModel
 {
     public string LocationName { get; set; }
+    public string LocationDescription { get; set; }
     public ICollection<TeslaCar> CarsAtLocation { get; set; }
 
     public Location()
@@ -12,10 +13,11 @@ public sealed class Location : BaseModel
         
     }
 
-    public Location(Guid Id, string locationName, ICollection<TeslaCar> carsAtLocation) : base(Id)
+    public Location(Guid Id, string locationName, ICollection<TeslaCar> carsAtLocation, string locationDescription) : base(Id)
     {
         LocationName = locationName;
         CarsAtLocation = carsAtLocation;
+        LocationDescription = locationDescription;
     }
 
     public override bool Equals(object? obj)

@@ -9,6 +9,16 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.InjectDAL();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("OpenCorsPolicy",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
+        });
+});
 
 builder.Services.AddSwaggerGen();
 
@@ -27,7 +37,10 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+
 app.MapControllers();
+
+app.UseCors("OpenCorsPolicy");
 
 app.MapFallbackToFile("/index.html");
 

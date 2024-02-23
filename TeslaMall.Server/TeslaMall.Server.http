@@ -1,6 +1,0 @@
-@TeslaMall.Server_HostAddress = http://localhost:5052
-
-GET {{TeslaMall.Server_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

@@ -8,3 +8,5 @@
 6. Custom dependecies within DI Container were moved to dedicated extension methods to clean up program.cs structure
 7. Implement DTO layer to ensure safety of database content with basic attribute validation
 8. To speed up and ease domain model to dto model conversion Automapper was used
+9. I've decided to use MaterialUI as a main UI library to speed up development and ensure mobile friendly design
+10. I've added description as a additional contextual info for every rental location 
