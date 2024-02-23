@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using TeslaMall.Server.DTO.Location;
-using TeslaMall.Server.DTO.Reservation;
+using TeslaMall.Server.DTO.Models;
+using TeslaMall.Server.DTO.Models.Location;
+using TeslaMall.Server.DTO.Models.Reservation;
 using TeslaMall.Server.Models;
 
-namespace TeslaMall.Server.DTO.Car;
+namespace TeslaMall.Server.DTO.Models.Car;
 
 public record CarDTO : BaseDTO
 {
@@ -22,7 +23,7 @@ public record CarDTO : BaseDTO
 
     public ReservationDTO? RelatedReservation { get; init; }
 
-    public CarDTO(Guid id, string modelName, LocationDTO? relatedLocation, ReservationDTO? relatedReservation) : base(id)   
+    public CarDTO(Guid id, string modelName, LocationDTO? relatedLocation, ReservationDTO? relatedReservation) : base(id)
     {
         ModelName = modelName;
         RelatedLocation = relatedLocation;

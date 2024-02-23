@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using TeslaMall.Server.DTO.Car;
-using TeslaMall.Server.DTO.ReservationPeriod;
+using TeslaMall.Server.DTO.Models;
+using TeslaMall.Server.DTO.Models.Car;
+using TeslaMall.Server.DTO.Models.ReservationPeriod;
 
-namespace TeslaMall.Server.DTO.Reservation;
+namespace TeslaMall.Server.DTO.Models.Reservation;
 
 public record ReservationDTO : BaseDTO
 {

@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using TeslaMall.Server.DTO.Car;
+using TeslaMall.Server.DTO.Models;
+using TeslaMall.Server.DTO.Models.Car;
 
-namespace TeslaMall.Server.DTO.Location;
+namespace TeslaMall.Server.DTO.Models.Location;
 
 public record LocationDTO : BaseDTO
 {
