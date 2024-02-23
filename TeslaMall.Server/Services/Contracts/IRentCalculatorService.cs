@@ -4,5 +4,5 @@ namespace TeslaMall.Server.Services.Contracts;
 
 public interface IRentCalculatorService
 {
-    public decimal CalculateCostOfRent(Reservation reservation);
+    public float CalculateCostOfRent(Reservation reservation);
 }

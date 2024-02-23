@@ -2,10 +2,14 @@
 
 public abstract class BaseModel
 {
-    public readonly Guid id;
+    public Guid Id { get; set; }
 
+    public BaseModel()
+    {
+        
+    }
     public BaseModel(Guid Id)
     {
-        id = Id;
+        this.Id = Id;
     }
 }

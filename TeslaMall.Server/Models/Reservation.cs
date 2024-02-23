@@ -5,11 +5,16 @@ namespace TeslaMall.Server.Models;
 
 public sealed class Reservation : BaseModel
 {
-    public TeslaCar RentedCar { get; set; }
+    public TeslaCar RentedCar { get; init; }
     public ReservationPeriod ReservationPeriod { get; set; }
-    public decimal ReservationCosts { get => ReservationCosts; private set { _ = value >= 0 ? value : throw new Exception("Reservation costs cannot be below zero");} }
+    public float ReservationCosts { get => ReservationCosts; private set { _ = value >= 0 ? value : throw new Exception("Reservation costs cannot be below zero");} }
     public bool IsReservationConfirmed { get; private set; }
     public bool IsReservationPaid { get; private set; }
+
+    public Reservation()
+    {
+        
+    }
     public Reservation(Guid Id, TeslaCar rentedCar, ReservationPeriod reservationPeriod) : base(Id)
     {
         RentedCar = rentedCar;
