@@ -1,37 +1,49 @@
-﻿using TeslaMall.Server.DAL.Repository.Contracts;
+﻿using Microsoft.EntityFrameworkCore;
+using TeslaMall.Server.DAL.Context;
+using TeslaMall.Server.DAL.Repository.Contracts;
 using TeslaMall.Server.Models;
 
 namespace TeslaMall.Server.DAL.Repository.Implementations;
 
 public class ReservationRepository : IReservationRepository
 {
-    public Task AddAsync(Reservation reservation)
+    private readonly TeslaMallContext ctx;
+
+    public ReservationRepository(TeslaMallContext ctx)
     {
-        throw new NotImplementedException();
+        this.ctx = ctx;
+    }
+    public async Task<bool> AddAsync(Reservation reservation)
+    {
+        await ctx.AddAsync(reservation);
+        return await ChangeDatabaseAsync();
     }
 
-    public Task<bool> CancelReservationAsync(Reservation reservation)
+    public async Task<bool> CancelReservationAsync(Reservation reservation)
     {
-        throw new NotImplementedException();
+        reservation.CancelReservation();
+        return await ChangeDatabaseAsync();
     }
 
-    public Task<bool> ConfirmReservation(Reservation reservation)
+    public async Task<bool> ConfirmReservationAsync(Reservation reservation)
     {
-        throw new NotImplementedException();
+        reservation.ConfirmReservation();
+        return await ChangeDatabaseAsync();
     }
 
-    public Task<bool> ConfirmReservationAsync(Reservation reservation)
+    public async Task<ICollection<Reservation>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        return await ctx.Reservations.ToListAsync();
     }
 
-    public Task<ICollection<Reservation>> GetAllAsync()
+    public async Task<Reservation> GetSingleAsync(int id)
     {
-        throw new NotImplementedException();
+        return await ctx.Reservations.FirstAsync(e => e.Id.Equals(id));
     }
 
-    public Task<Reservation> GetSingleAsync(int id)
+    private async Task<bool> ChangeDatabaseAsync()
     {
-        throw new NotImplementedException();
+        var opResult = await ctx.SaveChangesAsync();
+        return opResult != 0 ? true : false;
     }
 }
