@@ -6,3 +6,4 @@
 4. I've decided to go with persistency layer using entity framework (code first approach) with msssql 
 5. Access to data is done via repository design pattern to enable easy data source switching (ex. from mssql to mongo) 
 6. Custom dependecies within DI Container were moved to dedicated extension methods to clean up program.cs structure
+7. Implement DTO layer to ensure safety of database content with basic attribute validation
