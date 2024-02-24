@@ -4,6 +4,7 @@ using TeslaMall.Server.DTO.Models.Car;
 using TeslaMall.Server.DTO.Models.Location;
 using TeslaMall.Server.DTO.Models.Reservation;
 using TeslaMall.Server.DTO.Models.ReservationPeriod;
+using TeslaMall.Server.DTO.Models.UserReservation;
 using TeslaMall.Server.Models;
 
 namespace TeslaMall.Server.DTO.MapperProfiles;
@@ -17,5 +18,6 @@ public class TeslaMallProfilesContainer : Profile
         CreateMap<Location, LocationDTO>().ReverseMap();
         CreateMap<Reservation, ReservationDTO>().ReverseMap();
         CreateMap<ReservationPeriod, ReservationPeriodDTO>().ReverseMap();
+        CreateMap<UserReservation, UserReservationDTO>().ReverseMap();
     }
 }

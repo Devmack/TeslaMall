@@ -10,3 +10,4 @@
 8. To speed up and ease domain model to dto model conversion Automapper was used
 9. I've decided to use MaterialUI as a main UI library to speed up development and ensure mobile friendly design
 10. I've added description as a additional contextual info for every rental location 
+11. To match requirement about renting and cancelling rent I've assumed that rent must be assigned to a someone - so i've added userreservation entity to enable ability to rent via email and further on unrent. to secure unwanted unrenting user gets assigned personal key that will be required for checking reservation and also cancelling.

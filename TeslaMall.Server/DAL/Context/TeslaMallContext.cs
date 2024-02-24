@@ -11,6 +11,7 @@ public class TeslaMallContext : DbContext
     public DbSet<Reservation> Reservations { get; set; }
     public DbSet<ReservationPeriod> ReservationPeriods { get; set; }
     public DbSet<Location> RentalLocations { get; set; }
+    public DbSet<UserReservation> UserReservations { get; set; }
 
     public TeslaMallContext(){
         Database.EnsureCreated();
