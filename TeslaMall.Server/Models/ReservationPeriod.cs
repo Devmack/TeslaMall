@@ -6,12 +6,10 @@ public sealed class ReservationPeriod : BaseModel
 {
     public Guid RelatedReservationId {  get; set; }
     public Reservation RelatedReservation { get; set; }
-    public DateTime ReservationStart { get => _reservationStart; set { _ = value.CompareTo(ReservationEnd) > 0 ? value : throw new DateException("Reservation start cannot be later than reservation end ");  } }
-    public DateTime ReservationEnd { get => _reservationEnd; set { _ = value.CompareTo(ReservationStart) >= 0 ? value : throw new DateException("Reservation end cannot be earlier than reservation start "); } }
-    public int ReservationLength { get => (_reservationEnd - _reservationStart).Days; }
+    public DateTime ReservationStart { get; set; }
+    public DateTime ReservationEnd { get; set; }
+    public int ReservationLength { get => (ReservationEnd - ReservationStart).Days; }
 
-    private DateTime _reservationEnd;
-    private DateTime _reservationStart;
     public ReservationPeriod()
     {
         

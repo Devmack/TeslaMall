@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Modal, Box, Typography, Button, TextField } from '@mui/material';
-import { CreateReservation } from '../services/RentalAPI';
+import { CreateReservation, ConfirmReservation } from '../services/RentalAPI';
 
 function RentalSummaryModal({ isOpen, onClose, carName, rentalDuration, rentalCost, start, end, email }) {
     const [confirmCode, setConfirmCode] = useState('');
     const [isConfirmed, setIsConfirmed] = useState(false);
+    const [cost, setCost] = useState('');
 
     const handleConfirm = async () => {
         try {
@@ -14,14 +15,23 @@ function RentalSummaryModal({ isOpen, onClose, carName, rentalDuration, rentalCo
                 rentedCarId: carName,
                 reservationPeriod: { reservationStart: start, reservationEnd: end, reservationLength: rentalDuration, relatedReservationId: "93243b0e-6fbf-4a68-a6c1-6da4b4e3c3e4" }
             });
+            console.log(data);
+            setCost(data.reservationCosts);
         } catch (error) {
             console.error('Error confirming rental:', error);
         }
     };
 
-    const handlePay = () => {
-        console.log('Pay');
-        toast.success('Rental confirmed successfully!');
+    const handlePay = async () => {
+        try {
+            const data = await ConfirmReservation({
+                id: "93243b0e-6fbf-4a68-a6c1-6da4b4e3c3e1",
+                email: { email }, reservationCode: 1234, reservationId: "93243b0e-6fbf-4a68-a6c1-6da4b4e3c3e4"
+            });
+            console.log(data);
+        } catch (error) {
+            console.error('Error confirming rental:', error);
+        }
     };
 
     return (
@@ -57,15 +67,16 @@ function RentalSummaryModal({ isOpen, onClose, carName, rentalDuration, rentalCo
                 <Typography id="modal-description" variant="body1" gutterBottom>
                     <strong>Rental Duration:</strong> {rentalDuration} days
                 </Typography>
-                <Typography id="modal-description" variant="body1" gutterBottom>
-                    <strong>Rental Cost:</strong> ${rentalCost}
-                </Typography>
+
                 {!isConfirmed ? (
                     <Button variant="contained" color="primary" onClick={handleConfirm} sx={{ mt: 2 }}>
                         Confirm
                     </Button>
                 ) : (
                     <>
+                        <Typography id="modal-description" variant="body1" gutterBottom>
+                                <strong>Rental Cost:</strong> ${cost}
+                        </Typography>
                         <TextField
                             label="Confirm Code"
                             variant="outlined"

@@ -16,7 +16,9 @@ public class TeslaMallProfilesContainer : Profile
         CreateMap<BaseModel, BaseDTO>().ReverseMap();
         CreateMap<TeslaCar, CarDTO>().ReverseMap();
         CreateMap<Location, LocationDTO>().ReverseMap();
-        CreateMap<Reservation, ReservationDTO>().ReverseMap();
+        CreateMap<Reservation, ReservationDTO>()
+            .ForMember(dest => dest.ReservationPeriod, opt => opt.MapFrom(src => src.ReservationPeriod))
+            .ReverseMap();
         CreateMap<ReservationPeriod, ReservationPeriodDTO>().ReverseMap();
         CreateMap<UserReservation, UserReservationDTO>().ReverseMap();
     }

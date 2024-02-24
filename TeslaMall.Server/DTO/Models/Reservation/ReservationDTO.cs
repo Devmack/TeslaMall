@@ -15,11 +15,11 @@ public record ReservationDTO : BaseDTO
     [Required(ErrorMessage = "Reservation period is required")]
     public ReservationPeriodDTO ReservationPeriod { get; set; }
 
-    public float ReservationCosts { get; init; }
+    public float ReservationCosts { get; set; }
 
-    public bool IsReservationConfirmed { get; init; }
+    public bool IsReservationConfirmed { get; set; }
 
-    public bool IsReservationPaid { get; init; }
+    public bool IsReservationPaid { get; set; }
 
     public ReservationDTO() 
     {

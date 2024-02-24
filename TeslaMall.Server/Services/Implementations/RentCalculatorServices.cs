@@ -5,14 +5,13 @@ namespace TeslaMall.Server.Services.Implementations;
 
 public class RentCalculatorServices : IRentCalculatorService
 {
-    private float baseFuelPerDayFactor;
+    private float baseFuelPerDayFactor = 1;
     public RentCalculatorServices(float baseFuelPerDayFactor)
     {
         this.baseFuelPerDayFactor = baseFuelPerDayFactor;
     }
     public RentCalculatorServices()
     {
-        
     }
     public float CalculateCostOfRent(Reservation reservation)
     {
