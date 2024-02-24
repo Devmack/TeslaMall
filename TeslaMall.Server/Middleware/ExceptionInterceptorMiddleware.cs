@@ -6,8 +6,8 @@ namespace TeslaMall.Server.Middleware;
 public class ExceptionInterceptorMiddleware 
 {
     private readonly RequestDelegate _next;
-    private readonly ILogger _logger;
-    public ExceptionInterceptorMiddleware(RequestDelegate next, ILogger logger)
+    private readonly ILogger<ExceptionInterceptorMiddleware> _logger;
+    public ExceptionInterceptorMiddleware(RequestDelegate next, ILogger<ExceptionInterceptorMiddleware> logger)
     {
         _logger = logger;
         _next = next;
