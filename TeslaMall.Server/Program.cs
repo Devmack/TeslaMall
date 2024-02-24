@@ -1,5 +1,6 @@
 using System.Reflection;
 using TeslaMall.Server.Extensions;
+using TeslaMall.Server.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,6 +40,8 @@ app.UseAuthorization();
 
 
 app.MapControllers();
+
+app.UseMiddleware<ExceptionInterceptorMiddleware>();
 
 app.UseCors("OpenCorsPolicy");
 
