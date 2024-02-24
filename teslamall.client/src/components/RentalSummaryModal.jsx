@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Box, Typography, Button, TextField } from '@mui/material';
 import { CreateReservation } from '../services/RentalAPI';
-import { toast } from 'react-toastify'; 
 
 function RentalSummaryModal({ isOpen, onClose, carName, rentalDuration, rentalCost, start, end, email }) {
     const [confirmCode, setConfirmCode] = useState('');
@@ -15,17 +14,14 @@ function RentalSummaryModal({ isOpen, onClose, carName, rentalDuration, rentalCo
                 rentedCarId: carName,
                 reservationPeriod: { reservationStart: start, reservationEnd: end, reservationLength: rentalDuration, relatedReservationId: "93243b0e-6fbf-4a68-a6c1-6da4b4e3c3e4" }
             });
-            if (data) {
-                toast.success('Rental confirmed successfully!');
-            }
         } catch (error) {
             console.error('Error confirming rental:', error);
-            toast.error('Error confirming rental. Please try again.');
         }
     };
 
     const handlePay = () => {
         console.log('Pay');
+        toast.success('Rental confirmed successfully!');
     };
 
     return (

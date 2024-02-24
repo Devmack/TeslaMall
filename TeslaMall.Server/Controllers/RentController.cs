@@ -28,7 +28,7 @@ namespace TeslaMall.Server.Controllers
             var mapped = mapper.Map<Reservation>(createDTO);
             await reservationRepository.AddAsync(mapped);
 
-            return BadRequest();
+            return Created();
         }
 
         [HttpPost("/Reservation/Confirmed")]

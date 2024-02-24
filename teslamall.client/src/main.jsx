@@ -8,6 +8,7 @@ import {
 import './index.css'
 import LocationPage from './pages/LocationPage.jsx';
 import ReservationPage from './pages/ReservationPage.jsx';
+import 'react-toastify/dist/ReactToastify.css';
 
 const router = createBrowserRouter([
     {
