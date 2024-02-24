@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TeslaMall.Server.DAL.Context;
 
@@ -11,9 +12,11 @@ using TeslaMall.Server.DAL.Context;
 namespace TeslaMall.Server.Migrations
 {
     [DbContext(typeof(TeslaMallContext))]
-    partial class TeslaMallContextModelSnapshot : ModelSnapshot
+    [Migration("20240224191337_CarIdNavigationInReservation")]
+    partial class CarIdNavigationInReservation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

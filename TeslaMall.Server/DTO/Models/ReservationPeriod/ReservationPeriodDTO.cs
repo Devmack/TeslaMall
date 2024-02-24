@@ -1,6 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using TeslaMall.Server.DTO.Models;
-using TeslaMall.Server.DTO.Models.Reservation;
 using TeslaMall.Server.Exceptions;
 
 namespace TeslaMall.Server.DTO.Models.ReservationPeriod;
@@ -9,15 +7,18 @@ public record ReservationPeriodDTO : BaseDTO
 {
     public Guid RelatedReservationId { get; init; }
 
-    public ReservationDTO RelatedReservation { get; init; }
-
     [Required(ErrorMessage = "Reservation start date is required")]
-    public DateTime ReservationStart { get; init; }
+    public DateTime ReservationStart { get; set; }
 
     [Required(ErrorMessage = "Reservation end date is required")]
-    public DateTime ReservationEnd { get; init; }
+    public DateTime ReservationEnd { get; set; }
 
     public int ReservationLength { get; init; }
+
+    public ReservationPeriodDTO()
+    {
+        
+    }
 
     public ReservationPeriodDTO(Guid id, DateTime reservationStart, DateTime reservationEnd, int maxReservationPeriod = 30) : base(id)
     {

@@ -25,9 +25,10 @@ public sealed class ReservationRepository : IReservationRepository
         return await ChangeDatabaseAsync();
     }
 
-    public async Task<bool> ConfirmReservationAsync(Reservation reservation)
+    public async Task<bool> ConfirmReservationAsync(Reservation reservation, UserReservation user)
     {
         reservation.ConfirmReservation();
+        await ctx.UserReservations.AddAsync(user);
         return await ChangeDatabaseAsync();
     }
 
