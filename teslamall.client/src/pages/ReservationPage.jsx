@@ -5,14 +5,26 @@ import { FormControl, InputLabel, Select, Button, Grid, TextField, Divider, Card
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import RentalSummaryModal from '../components/RentalSummaryModal';
+import { GetCarsAtLocation } from '../services/LocationApi';
 
 function ReservationPage(props) {
     let { state } = useLocation([]);
 
-    let cars = state.location.carsAtLocation
+    let cars = state.location.carsAtLocation;
+    let name = state.location.locationName;
+    const [availableCars, setAvailableCars] = useState([]);
 
     useEffect(() => {
-        cars = state.location.carsAtLocation
+        const fetchData = async () => {
+            try {
+                const response = await GetCarsAtLocation(name);
+                setAvailableCars(response);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchData(); 
     }, []);
 
     const [startDate, setStartDate] = useState(null);
@@ -116,7 +128,7 @@ function ReservationPage(props) {
                                                 value={selectedCar}
                                                 onChange={handleCarChange}
                                             >
-                                                {cars.map((car) => (
+                                                {availableCars.map((car) => (
                                                     <MenuItem key={car.id} value={car.id}>
                                                         {car.modelName}
                                                     </MenuItem>

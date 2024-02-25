@@ -10,3 +10,12 @@ export const GetAllLocations = async () => {
         throw error;
     }
 };
+
+export const GetCarsAtLocation = async (locationName) => {
+    try {
+        const response = await axios.get(`${API_URL}/Locations/${locationName}/Cars`);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};

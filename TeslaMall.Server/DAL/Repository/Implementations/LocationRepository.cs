@@ -24,6 +24,14 @@ public sealed class LocationRepository : IlocationRepository
         return await ctx.RentalLocations.Include(l => l.CarsAtLocation).ToListAsync();
     }
 
+    public async Task<ICollection<TeslaCar>> GetAvailableCarsAtLocation(string LocationName)
+    {
+        return await ctx.Cars
+            .Include(c => c.RelatedLocation)
+            .Where(c => c.RelatedLocation.LocationName == LocationName)
+            .Where(c => c.RelatedReservationId == null).ToListAsync();  
+    }
+
     public async Task<Location> GetSingleAsync(Guid id)
     {
         return await ctx.RentalLocations.FirstAsync(e => e.Id.Equals(id));
