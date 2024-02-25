@@ -11,20 +11,22 @@ public record UserReservationDTO : BaseDTO
     public string Email { get; set; }
 
     [Required]
-    public string ReservationId { get; set; }
+    public Guid ReservationId { get; set; }
 
-    [Required]
-    public ReservationDTO RelatedReservation { get; set; }
 
     [Required]
     public int ReservationCode { get; set; }
 
+    public UserReservationDTO()
+    {
+        
+    }
 
-    public UserReservationDTO(Guid id, string email, string reservationId, ReservationDTO relatedReservation, int reservationCode) : base(id)
+
+    public UserReservationDTO(Guid id, string email, Guid reservationId, int reservationCode) : base(id)
     {
         Email = email;
         ReservationId = reservationId;
-        RelatedReservation = relatedReservation;
         ReservationCode = reservationCode;
     }
 }

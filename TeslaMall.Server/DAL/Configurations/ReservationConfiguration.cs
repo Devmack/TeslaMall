@@ -12,5 +12,7 @@ public class ReservationConfiguration : IEntityTypeConfiguration<Reservation>
         .HasOne(r => r.RentedCar)
         .WithOne(c => c.RelatedReservation)
         .HasForeignKey<TeslaCar>(c => c.RelatedReservationId);
+
+        
     }
 }

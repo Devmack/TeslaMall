@@ -9,6 +9,7 @@ public class UserReservationConfiguration : IEntityTypeConfiguration<UserReserva
     public void Configure(EntityTypeBuilder<UserReservation> builder)
     {
         builder
-        .HasOne(el => el.RelatedReservation);
+        .HasOne(el => el.RelatedReservation)
+        .WithOne(r => r.UserReservation).HasForeignKey<Reservation>(r => r.UserReservationId);
     }
 }

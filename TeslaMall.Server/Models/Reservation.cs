@@ -12,6 +12,9 @@ public sealed class Reservation : BaseModel
     public bool IsReservationConfirmed { get; private set; }
     public bool IsReservationPaid { get; private set; }
 
+    public Guid? UserReservationId { get; set; }
+    public UserReservation? UserReservation { get; set; }
+
 
     public Reservation()
     {
@@ -27,8 +30,8 @@ public sealed class Reservation : BaseModel
     public void ConfirmReservation()
     {   
         if (RentedCar.CurrentCarStatus == CarStatus.RENTED) { throw new Exception("Car is already rented"); }
-        if (!IsReservationPaid) { throw new Exception("You must pay before you can confirm reservation"); } 
         IsReservationConfirmed = true;
+        IsReservationPaid = true;
         RentedCar.CurrentCarStatus = CarStatus.RENTED;
     }
 

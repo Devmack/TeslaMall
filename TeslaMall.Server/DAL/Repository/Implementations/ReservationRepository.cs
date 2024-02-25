@@ -16,6 +16,12 @@ public sealed class ReservationRepository : IReservationRepository
     public async Task<bool> AddAsync(Reservation reservation)
     {   
         await ctx.Reservations.AddAsync(reservation);
+        var car = await ctx.Cars.FirstAsync(c => c.Id == reservation.RentedCarId);
+        if (car != null) { car.RelatedReservationId = reservation.Id; } else
+        {
+            throw new Exception("There is no car with given id from reservation!");
+        }
+        
         return await ChangeDatabaseAsync();
     }
 
@@ -39,7 +45,7 @@ public sealed class ReservationRepository : IReservationRepository
 
     public async Task<Reservation> GetSingleAsync(Guid id)
     {
-        return await ctx.Reservations.FirstAsync(e => e.Id.Equals(id));
+        return await ctx.Reservations.Include(r => r.RentedCar).FirstAsync(e => e.Id.Equals(id));
     }
 
     public async Task<bool> RemoveAsync(Reservation model)

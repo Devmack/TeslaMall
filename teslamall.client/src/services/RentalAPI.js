@@ -13,7 +13,7 @@ export const CreateReservation = async (reservationData) => {
 
 export const ConfirmReservation = async (reservationData) => {
     try {
-        const response = await axios.post(`${API_URL}/Rent/Confirmed`, reservationData);
+        const response = await axios.post(`${API_URL}/Confirmation`, reservationData);
         return response.data;
     } catch (error) {
         throw error;

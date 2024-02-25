@@ -24,9 +24,13 @@ function RentalSummaryModal({ isOpen, onClose, carName, rentalDuration, rentalCo
 
     const handlePay = async () => {
         try {
+            console.log({
+                id: "93243b0e-6fbf-4a68-a6c1-6da4b4e3c3e1",
+                email: email, reservationCode: 1234, reservationId: "93243b0e-6fbf-4a68-a6c1-6da4b4e3c3e4"
+            });
             const data = await ConfirmReservation({
                 id: "93243b0e-6fbf-4a68-a6c1-6da4b4e3c3e1",
-                email: { email }, reservationCode: 1234, reservationId: "93243b0e-6fbf-4a68-a6c1-6da4b4e3c3e4"
+                email: email, reservationCode: 1234, reservationId: "93243b0e-6fbf-4a68-a6c1-6da4b4e3c3e4"
             });
             console.log(data);
         } catch (error) {

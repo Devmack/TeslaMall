@@ -39,18 +39,19 @@ namespace TeslaMall.Server.Controllers
             return Ok(createDTO);
         }
 
-        [HttpPost("/Rent/Confirmed")]
-        [ProducesResponseType(typeof(string), 201)]
+        [HttpPost]
+        [Route("/Confirmation")]
+        [ProducesResponseType(typeof(string), 200)]
         [ProducesResponseType(typeof(string), 503)]
-        public async Task<ActionResult<ReservationDTO>> AssignReservation([FromBody] UserReservationDTO userReservationDTO)
+        public async Task<ActionResult<UserReservationDTO>> AssignReservation([FromBody] UserReservationDTO userReservationDTO)
         {
-
             var mapped = mapper.Map<UserReservation>(userReservationDTO);
-            var reservation = await reservationRepository.GetSingleAsync(Guid.Parse(userReservationDTO.ReservationId));
+            var reservation = await reservationRepository.GetSingleAsync(userReservationDTO.ReservationId);
             await reservationRepository.ConfirmReservationAsync(reservation, mapped);
 
-            return Created();
+            return Ok(userReservationDTO);
 
         }
+
     }
 }
