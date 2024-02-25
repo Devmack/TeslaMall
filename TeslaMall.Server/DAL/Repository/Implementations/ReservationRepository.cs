@@ -66,7 +66,8 @@ public sealed class ReservationRepository : IReservationRepository
     {
         var targetFound = await GetSingleAsync(model.Id);
         if (targetFound != null)
-        {
+        {   
+            ctx.Reservations.Remove(targetFound);
             await ChangeDatabaseAsync();
         }
         throw new Exception("Model with given id does not exists");

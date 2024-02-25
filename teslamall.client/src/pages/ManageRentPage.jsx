@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { Card, CardContent, Typography, TextField, Button } from '@mui/material';
+import { Card, CardContent, Typography, TextField, Button, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { CancelReservation, GetReservationDetails } from '../services/RentalAPI';
+import { useNavigate } from "react-router-dom";
 
 function ManageRentPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [reservation, setReservation] = useState();
+    const navigate = useNavigate();
 
     const handleLogin = async () => {
         try {
@@ -25,48 +27,49 @@ function ManageRentPage() {
     };
 
     const handleCancelRent = async () => {
-        alert('Rent cancelled');
+        
         try {
             const data = await CancelReservation({
                 email: email, code: password
             });
             console.log(data)
+            navigate('/');
         } catch (error) {
             alert('Invalid credentials');
         }
     };
 
     return (
-        <>
-            {!isAuthenticated ? (
-                <div style={{ textAlign: 'center' }}>
-                    <Typography variant="h5" gutterBottom>
-                        Rental Authentication
-                    </Typography>
-                    <TextField
-                        label="Email"
-                        variant="outlined"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        fullWidth
-                        style={{ marginBottom: '10px' }}
-                    />
-                    <TextField
-                        label="Password"
-                        type="password"
-                        variant="outlined"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        fullWidth
-                        style={{ marginBottom: '20px' }}
-                    />
-                    <Button variant="contained" color="primary" onClick={handleLogin}>
-                        Login
-                    </Button>
-                </div>
-            ) : (
-                <Card style={{ maxWidth: 400, margin: '0 auto' }}>
-                    <CardContent>
+        <Card style={{ maxWidth: 400, margin: '0 auto' }}>
+            <CardContent>
+                {!isAuthenticated ? (
+                    <div style={{ textAlign: 'center' }}>
+                        <Typography variant="h5" gutterBottom>
+                            Rental Authentication
+                        </Typography>
+                        <FormControl fullWidth style={{ marginBottom: '10px' }}>
+                            <TextField
+                                label="Email"
+                                variant="outlined"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </FormControl>
+                        <FormControl fullWidth style={{ marginBottom: '20px' }}>
+                            <TextField
+                                label="Password"
+                                type="password"
+                                variant="outlined"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                        </FormControl>
+                        <Button variant="contained" color="primary" onClick={handleLogin}>
+                            Login
+                        </Button>
+                    </div>
+                ) : (
+                    <>
                         <Typography variant="h5" gutterBottom>
                             Rent Details
                         </Typography>
@@ -91,10 +94,10 @@ function ManageRentPage() {
                         <Button variant="contained" color="secondary" onClick={handleCancelRent} style={{ marginTop: '20px' }}>
                             Cancel Rent
                         </Button>
-                    </CardContent>
-                </Card>
-            )}
-        </>
+                    </>
+                )}
+            </CardContent>
+        </Card>
     );
 }
 

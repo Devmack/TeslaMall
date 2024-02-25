@@ -80,6 +80,7 @@ namespace TeslaMall.Server.Controllers
             var fetchedReservation = await reservationRepository.GetSingleAsync(Guid.Parse(reservationFound.ReservationId));
             fetchedReservation.CancelReservation();
             await reservationRepository.UpdateAsync(fetchedReservation);
+            await reservationRepository.RemoveAsync(fetchedReservation);
             await reservationRepository.RemoveUserReservation(reservationFound);
 
             return Ok(true);
