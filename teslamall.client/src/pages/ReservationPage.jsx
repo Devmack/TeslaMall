@@ -6,6 +6,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import RentalSummaryModal from '../components/RentalSummaryModal';
 import { GetCarsAtLocation } from '../services/LocationApi';
+import { RentExists } from '../services/RentalAPI';
 
 function ReservationPage(props) {
     let { state } = useLocation([]);
@@ -34,6 +35,7 @@ function ReservationPage(props) {
     const [showElement, setShowElement] = useState(false);
     const [summaryModal, setsummaryModal] = useState(false);
     const [reservationDuration, setReservationDuration] = useState(0);
+    const [lockEmail, setLockEmail] = useState(false);
 
     const handleStartDateChange = (date) => {
         setStartDate(date);
@@ -72,15 +74,22 @@ function ReservationPage(props) {
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
+        
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log('Start Date:', startDate);
-        console.log('End Date:', endDate);
-        console.log('Selected Car:', selectedCar);
-        console.log('Selected email:', email);
-        setsummaryModal(true);
+        try {
+            const response = await RentExists(email);
+            if (response == true) {
+                setLockEmail(true);
+            } else {
+                setLockEmail(false);
+                setsummaryModal(true);
+            }
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
     };
 
     return (
@@ -145,9 +154,11 @@ function ReservationPage(props) {
                                         />
                                     </Grid>
                                     <Grid item>
-                                        <Button variant="contained" color="primary" type="submit">
+                                        {!lockEmail ? (<Button variant="contained" color="primary" type="submit">
                                             Submit
-                                        </Button>
+                                        </Button>) :
+                                            <p>Reservation on this email already exists!</p>}
+                                        
                                     </Grid>
                                 </Grid>
                             </form>

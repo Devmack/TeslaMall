@@ -37,3 +37,12 @@ export const CancelReservation = async (reservationData) => {
         throw error;
     }
 };
+
+export const RentExists = async (email) => {
+    try {
+        const response = await axios.get(`${API_URL}/Rent/${email}/exists`);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};

@@ -69,6 +69,23 @@ namespace TeslaMall.Server.Controllers
 
         }
 
+        [HttpGet]
+        [Route("/Rent/{email}/exists")]
+        [ProducesResponseType(typeof(int), 200)]
+        [ProducesResponseType(typeof(int), 500)]
+        public async Task<ActionResult<bool>> CheckIfMailAlreadyRentACar(string email)
+        {
+            try
+            {
+                var reservation = await reservationRepository.GetReservationOfByUserAssignedAsync(email);
+            }
+            catch (Exception)
+            {
+                return Ok(false);
+            }
+            return Ok(true);
+        }
+
         [HttpPost]
         [Route("/CancelReservation")]
         [ProducesResponseType(typeof(string), 200)]
