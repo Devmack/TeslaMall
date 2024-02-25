@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import { Outlet, Link } from "react-router-dom";
 import { Typography } from "@mui/material";
-import backgroundImage from '../../public/mallorca_placeholder_image.jpg'; // Import your background image
+import backgroundImage from '../../public/mallorca_placeholder_image.jpg';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',

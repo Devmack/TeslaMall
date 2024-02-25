@@ -26,7 +26,7 @@ namespace TeslaMall.Server.Controllers
 
         [HttpPost("/Reservation")]
         [ProducesResponseType(typeof(string), 200)]
-        [ProducesResponseType(typeof(string), 503)]
+        [ProducesResponseType(typeof(string), 500)]
         public async Task<ActionResult<ReservationDTO>> CreateReservation([FromBody] ReservationDTO createDTO)
         {   
 
