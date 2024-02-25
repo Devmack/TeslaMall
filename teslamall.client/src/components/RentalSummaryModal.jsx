@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Box, Typography, Button, TextField, CircularProgress } from '@mui/material';
 import { CreateReservation, ConfirmReservation } from '../services/RentalAPI';
+import { useNavigate } from "react-router-dom";
 
 function RentalSummaryModal({ isOpen, onClose, carName, rentalDuration, rentalCost, start, end, email }) {
     const [confirmCode, setConfirmCode] = useState('');
@@ -9,6 +10,7 @@ function RentalSummaryModal({ isOpen, onClose, carName, rentalDuration, rentalCo
     const [isPaying, setIsPaying] = useState(false);
     const [paymentMessage, setPaymentMessage] = useState('');
     const [isPaymentSuccessful, setIsPaymentSuccessful] = useState(false);
+    const navigate = useNavigate();
 
     const handleConfirm = async () => {
         try {
@@ -110,8 +112,8 @@ function RentalSummaryModal({ isOpen, onClose, carName, rentalDuration, rentalCo
                                 ) : (
                                     <Button
                                         variant="contained"
-                                        color="primary"
-                                        onClick={onClose}
+                                                    color="primary"
+                                                    onClick={() => { navigate('/'); }}
                                         sx={{ mt: 2 }}
                                     >
                                         Return to Main Page

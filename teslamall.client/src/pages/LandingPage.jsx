@@ -42,6 +42,7 @@ function LandingPage() {
           <Grid xs={12} xl={12} textAlign="center">
               <Button variant="outlined" ><Link to={`/RentLocations`}>Location</Link></Button>
               <Button variant="outlined">Cars</Button>
+              <Button variant="outlined">See my reservations</Button>
           </Grid>
           <Grid xs={6}>
           </Grid>
