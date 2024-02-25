@@ -32,10 +32,14 @@ public sealed class LocationRepository : IlocationRepository
             .Where(c => c.RelatedReservationId == null).ToListAsync();  
     }
 
+    public async Task<TeslaCar> GetCarById(Guid carId)
+    {
+        return await ctx.Cars.FirstAsync(c => c.Id == carId);
+    }
+
     public async Task<Location> GetSingleAsync(Guid id)
     {
         return await ctx.RentalLocations.FirstAsync(e => e.Id.Equals(id));
-
     }
 
     public async Task<bool> RemoveAsync(Location model)
@@ -54,6 +58,17 @@ public sealed class LocationRepository : IlocationRepository
         .SetProperty(b => b.LocationName, model.LocationName)
         .SetProperty(b => b.LocationDescription, model.LocationDescription)
         .SetProperty(b => b.CarsAtLocation, model.CarsAtLocation));
+
+        return await ChangeDatabaseAsync();
+    }
+
+    public async Task<bool> UpdateCarLocation(TeslaCar car)
+    {
+        var opResult = await ctx.Cars.FirstAsync(c => c.Id == car.Id);
+        if (opResult != null)
+        {
+            opResult.RelatedLocationId = car.RelatedLocationId;
+        }
 
         return await ChangeDatabaseAsync();
     }

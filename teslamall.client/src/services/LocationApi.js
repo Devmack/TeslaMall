@@ -19,3 +19,12 @@ export const GetCarsAtLocation = async (locationName) => {
         throw error;
     }
 };
+
+export const ChangeCarLocation = async (data) => {
+    try {
+        const response = await axios.put(`${API_URL}/Car/Location`, data);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
