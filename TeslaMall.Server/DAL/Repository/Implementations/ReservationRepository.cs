@@ -43,9 +43,23 @@ public sealed class ReservationRepository : IReservationRepository
         return await ctx.Reservations.ToListAsync();
     }
 
+    public async Task<UserReservation> GetReservationOfByUserAssignedAsync(string email)
+    {
+        return await ctx.UserReservations.Include(el => el.RelatedReservation).FirstAsync(c => c.Email == email);   
+    }
+
     public async Task<Reservation> GetSingleAsync(Guid id)
     {
-        return await ctx.Reservations.Include(r => r.RentedCar).FirstAsync(e => e.Id.Equals(id));
+        return await ctx.Reservations
+            .Include(r => r.ReservationPeriod) 
+            .Include(r => r.RentedCar).FirstAsync(e => e.Id.Equals(id));
+    }
+
+    public async Task<bool> UpdateAsync(Reservation model)
+    {
+        ctx.Reservations.Update(model);
+
+        return await ChangeDatabaseAsync();
     }
 
     public async Task<bool> RemoveAsync(Reservation model)
@@ -62,5 +76,11 @@ public sealed class ReservationRepository : IReservationRepository
     {
         var opResult = await ctx.SaveChangesAsync();
         return opResult != 0 ? true : false;
+    }
+
+    public async Task<bool> RemoveUserReservation(UserReservation userReservation)
+    {
+        ctx.UserReservations.Remove(userReservation);
+        return await ChangeDatabaseAsync();
     }
 }

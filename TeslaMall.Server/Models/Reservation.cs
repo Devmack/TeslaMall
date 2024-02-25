@@ -43,6 +43,7 @@ public sealed class Reservation : BaseModel
     public void CancelReservation()
     {
         IsReservationConfirmed = false;
+        RentedCar.RelatedReservationId = null;
         RentedCar.CurrentCarStatus = CarStatus.AVAILABLE;
     }
 }

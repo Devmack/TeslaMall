@@ -40,6 +40,16 @@ public sealed class LocationRepository : IlocationRepository
         throw new Exception("Model with given id does not exists");
     }
 
+    public async Task<bool> UpdateAsync(Location model)
+    {
+        var opResult = await ctx.RentalLocations.ExecuteUpdateAsync(setters => setters
+        .SetProperty(b => b.LocationName, model.LocationName)
+        .SetProperty(b => b.LocationDescription, model.LocationDescription)
+        .SetProperty(b => b.CarsAtLocation, model.CarsAtLocation));
+
+        return await ChangeDatabaseAsync();
+    }
+
     private async Task<bool> ChangeDatabaseAsync()
     {
         var opResult = await ctx.SaveChangesAsync();

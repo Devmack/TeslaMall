@@ -9,6 +9,7 @@ import './index.css'
 import LocationPage from './pages/LocationPage.jsx';
 import ReservationPage from './pages/ReservationPage.jsx';
 import 'react-toastify/dist/ReactToastify.css';
+import ManageRentPage from './pages/ManageRentPage.jsx';
 
 const router = createBrowserRouter([
     {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
     {
         path: "/Reservation",
         element: <ReservationPage></ReservationPage>,
+    },
+    {
+        path: "/ManageRent",
+        element: <ManageRentPage></ManageRentPage>,
     },
 ]);
 

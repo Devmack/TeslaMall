@@ -19,3 +19,21 @@ export const ConfirmReservation = async (reservationData) => {
         throw error;
     }
 };
+
+export const GetReservationDetails = async (reservationData) => {
+    try {
+        const response = await axios.post(`${API_URL}/UserReservation`, reservationData);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+
+export const CancelReservation = async (reservationData) => {
+    try {
+        const response = await axios.post(`${API_URL}/CancelReservation`, reservationData);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
