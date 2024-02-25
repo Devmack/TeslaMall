@@ -1,11 +1,21 @@
-# TeslaMall
+# Tesla mall 
+Project created for the recruitment process. 
+Tiny web app that enables user to rent a Tesla car at exotic mallorca for a given period of time. 
 
-1. Reservations period has limit to prevent booking for abstract time range (ex. 10000 years), also period setters have internal validation to prevent invalid data order
-2. Reservations must be confirmed to lock car for renting
-3. Reservations must be paid off to be confirmed
+## How to run
+Backend was written in .net 8.0 and utilize some of its features like collection literal. 
+I used template to store backend .net api and react + vite at one solution, quickest way to run is to trigger project from visual studio 22, which was used as a primary code editor
+
+Persistency is based on ORM - ef core and it requires MSSQL server to apply migration (forced to do at start) and seed with demo data
+
+## DevLog 
+**important!** **To cancel reservation for given email enter "1234"  as a code**. It is simple system to prevent anyone who knows your adress to see and cancel your rented car. 
+
+1. Reservations period has limit to prevent booking for abstract time range (ex. 10000 years)
+2. Reservations first is confirmed, later on paid.
 4. I've decided to go with persistency layer using entity framework (code first approach) with msssql 
 5. Access to data is done via repository design pattern to enable easy data source switching (ex. from mssql to mongo) 
-6. Custom dependecies within DI Container were moved to dedicated extension methods to clean up program.cs structure
+6. Custom dependencies within DI Container were moved to dedicated extension methods to clean up program.cs structure
 7. Implement DTO layer to ensure safety of database content with basic attribute validation
 8. To speed up and ease domain model to dto model conversion Automapper was used
 9. I've decided to use MaterialUI as a main UI library to speed up development and ensure mobile friendly design
