@@ -68,7 +68,7 @@ public sealed class ReservationRepository : IReservationRepository
         if (targetFound != null)
         {   
             ctx.Reservations.Remove(targetFound);
-            await ChangeDatabaseAsync();
+            return await ChangeDatabaseAsync();
         }
         throw new Exception("Model with given id does not exists");
     }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal, Box, Typography, Button, TextField, CircularProgress } from '@mui/material';
 import { CreateReservation, ConfirmReservation } from '../services/RentalAPI';
 import { useNavigate } from "react-router-dom";
@@ -11,14 +11,28 @@ function RentalSummaryModal({ isOpen, onClose, carName, rentalDuration, rentalCo
     const [paymentMessage, setPaymentMessage] = useState('');
     const [isPaymentSuccessful, setIsPaymentSuccessful] = useState(false);
     const navigate = useNavigate();
+    const [currentKeyId, setCurrentKeyId] = useState();
+
+    useEffect(() => {
+        setCurrentKeyId(uuidv4())
+    }, []);  
+
+    function uuidv4() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
+            .replace(/[xy]/g, function (c) {
+                const r = Math.random() * 16 | 0,
+                    v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+    }
 
     const handleConfirm = async () => {
         try {
             setIsConfirmed(true);
             const data = await CreateReservation({
-                id: "93243b0e-6fbf-4a68-a6c1-6da4b4e3c3e4",
+                id: currentKeyId,
                 rentedCarId: carName,
-                reservationPeriod: { reservationStart: start, reservationEnd: end, reservationLength: rentalDuration, relatedReservationId: "93243b0e-6fbf-4a68-a6c1-6da4b4e3c3e4" }
+                reservationPeriod: { reservationStart: start, reservationEnd: end, reservationLength: rentalDuration, relatedReservationId: currentKeyId }
             });
             console.log(data);
             setCost(data.reservationCosts);
@@ -31,9 +45,10 @@ function RentalSummaryModal({ isOpen, onClose, carName, rentalDuration, rentalCo
         try {
             setIsPaying(true);
             const data = await ConfirmReservation({
-                id: "93243b0e-6fbf-4a68-a6c1-6da4b4e3c3e1",
-                email: email, reservationCode: 1234, reservationId: "93243b0e-6fbf-4a68-a6c1-6da4b4e3c3e4"
+                id: uuidv4(),
+                email: email, reservationCode: 1234, reservationId: currentKeyId
             });
+            console.log(data)
             setIsPaying(false);
             setIsConfirmed(true);
             setIsPaymentSuccessful(true);
