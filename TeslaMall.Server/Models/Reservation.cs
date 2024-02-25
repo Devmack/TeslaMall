@@ -29,7 +29,6 @@ public sealed class Reservation : BaseModel
 
     public void ConfirmReservation()
     {   
-        if (RentedCar.CurrentCarStatus == CarStatus.RENTED) { throw new Exception("Car is already rented"); }
         IsReservationConfirmed = true;
         IsReservationPaid = true;
         RentedCar.CurrentCarStatus = CarStatus.RENTED;
