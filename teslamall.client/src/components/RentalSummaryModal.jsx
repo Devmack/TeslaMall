@@ -95,9 +95,21 @@ function RentalSummaryModal({ isOpen, onClose, carName, rentalDuration, rentalCo
                 </Typography>
 
                 {!isConfirmed ? (
-                    <Button variant="contained" color="primary" onClick={handleConfirm} sx={{ mt: 2 }}>
-                        Confirm
-                    </Button>
+                    rentalDuration <= 0 || rentalDuration > 30 ? (
+                        <Typography variant="body1" color="error">
+                            Rent period must be a value between 1 and 30!
+                        </Typography>
+                    ) : (
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={handleConfirm}
+                            disabled={rentalDuration <= 0}
+                            sx={{ mt: 2 }}
+                        >
+                            Confirm
+                        </Button>
+                    )
                 ) : (
                     <>
                         <Typography id="modal-description" variant="body1" gutterBottom>

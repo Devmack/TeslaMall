@@ -13,6 +13,7 @@ public record ReservationPeriodDTO : BaseDTO
     [Required(ErrorMessage = "Reservation end date is required")]
     public DateTime ReservationEnd { get; set; }
 
+    [Range(1, 30, ErrorMessage ="Rental time cannot be longer than 30 days!")]
     public int ReservationLength { get; init; }
 
     public ReservationPeriodDTO()
