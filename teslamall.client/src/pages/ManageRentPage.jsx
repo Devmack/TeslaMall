@@ -85,7 +85,7 @@ function ManageRentPage() {
                         </FormControl>
                         <FormControl fullWidth style={{ marginBottom: '20px' }}>
                             <TextField
-                                label="Password"
+                                label="Reservation code"
                                 type="password"
                                 variant="outlined"
                                 value={password}

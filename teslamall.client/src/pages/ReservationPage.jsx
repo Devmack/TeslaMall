@@ -35,7 +35,7 @@ function ReservationPage(props) {
     const [showElement, setShowElement] = useState(false);
     const [summaryModal, setsummaryModal] = useState(false);
     const [reservationDuration, setReservationDuration] = useState(0);
-    const [lockEmail, setLockEmail] = useState(false);
+    const [lock, setLock] = useState(false);
     const [errorMessage, setErrorMessage] = useState();
 
     const handleStartDateChange = (date) => {
@@ -71,6 +71,7 @@ function ReservationPage(props) {
 
     const handleCarChange = (event) => {
         setSelectedCar(event.target.value);
+        setLock(false);
     };
 
     const handleEmailChange = (event) => {
@@ -81,18 +82,30 @@ function ReservationPage(props) {
         if (!isValidEmail) {
             setErrorMessage("Email should have proper format!");
         }
-        setLockEmail(!isValidEmail);
+        setLock(!isValidEmail);
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        if (!email) {
+            setLock(true);
+            setErrorMessage("You have to insert email first!");
+            return;
+        }
+        if (!selectedCar) {
+            setLock(true);
+            setErrorMessage("You have to choose car first!");
+            return;
+        }
+
         try {
             const response = await RentExists(email);
             if (response == true) {
-                setLockEmail(true);
+                setLock(true);
                 setErrorMessage("Reservation under this adress already exists!");
             } else {
-                setLockEmail(false);
+                setLock(false);
                 setsummaryModal(true);
             }
         } catch (error) {
@@ -162,7 +175,7 @@ function ReservationPage(props) {
                                         />
                                     </Grid>
                                     <Grid item>
-                                        {!lockEmail ? (<Button variant="contained" color="primary" type="submit">
+                                        {!lock ? (<Button variant="contained" color="primary" type="submit">
                                             Submit
                                         </Button>) :
                                             <p>{errorMessage}</p>}
