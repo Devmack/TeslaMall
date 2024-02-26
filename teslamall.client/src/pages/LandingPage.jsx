@@ -62,7 +62,7 @@ function LandingPage() {
             </Container>
             <Footer>
                 <Typography variant="body2" color="textSecondary">
-                    Created by Dominik Starzyk | Email: starzykdominik93@gmail.com | LinkedIn: <Link href="www.linkedin.com/in/dominik-starzyk-002874129">Dominik Starzyk</Link>
+                    Created by Dominik Starzyk | Email: starzykdominik93@gmail.com | LinkedIn: <Link href="http://www.linkedin.com/in/dominik-starzyk-002874129">Dominik Starzyk</Link>
                 </Typography>
             </Footer>
         </>
