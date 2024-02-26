@@ -2,17 +2,17 @@
 Project created for the recruitment process. 
 Tiny web app that enables user to rent a Tesla car at exotic mallorca for a given period of time. 
 
-## How to run
+## How to run & use
 Backend was written in .net 8.0 and utilize some of its features like collection literal. 
 I used template to store backend .net api and react + vite at one solution, quickest way to run is to trigger project from visual studio 22, which was used as a primary code editor
 
 Persistency is based on ORM - ef core and it requires MSSQL server to apply migration (forced to do at start) and seed with demo data
 
-## DevLog - not chronological 
-## To be discussed, but my overal development strategy was to start from backend: identify domain models and persistency layer, then wrap and expose domain layer to the web. Next part was oriented on creating mock front. 
-
 **important!** **To cancel reservation for any reservation email enter "1234"  as a code (its hardcoded value, that can be replaced later on with some custom solution)**. It is simple system to prevent anyone who knows your adress to see and cancel your rented car. 
 Payment gate is simplest possible stub - to pay enter any value. Later on it can be replaced with custom payment gate 
+
+## DevLog - not chronological 
+## To be discussed, but my overal development strategy was to start from backend: identify domain models and persistency layer, then wrap and expose domain layer to the web. Next part was oriented on creating mock front. 
 
 1. Reservations period has limit to prevent booking for abstract time range (ex. 10000 years)
 2. Reservations first is confirmed, later on paid - I programmed user path that between confirmation and payment there is no "time in-between" either you pay or reject. 
@@ -31,7 +31,7 @@ Payment gate is simplest possible stub - to pay enter any value. Later on it can
 16. Reservations cannot be done with retroactive dates
 17. Introduced payment abstraction to demonstrate idea of inserting different payment gate implementation 
 18. Reservation is closed by pointing out return place (can be different as a starting one)
+19. CORS policy was deliberately set to open (without any restriction) - in production it should be changed to more restricted one.
 
 
-I hope you guys enjoyed the program! Looking forward to hearing from you
-Dominik
+I hope you guys enjoyed the program! Looking forward to hearing from you!
