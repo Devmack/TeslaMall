@@ -2,16 +2,19 @@
 using TeslaMall.Server.DAL.Context;
 using TeslaMall.Server.DAL.Repository.Contracts;
 using TeslaMall.Server.Models;
+using TeslaMall.Server.Services.Contracts;
 
 namespace TeslaMall.Server.DAL.Repository.Implementations;
 
 public sealed class ReservationRepository : IReservationRepository
 {
     private readonly TeslaMallContext ctx;
+    private readonly IPaymentGateService paymentService;
 
-    public ReservationRepository(TeslaMallContext ctx)
+    public ReservationRepository(TeslaMallContext ctx, IPaymentGateService paymentService)
     {
         this.ctx = ctx;
+        this.paymentService = paymentService;
     }
     public async Task<bool> AddAsync(Reservation reservation)
     {   
@@ -33,7 +36,7 @@ public sealed class ReservationRepository : IReservationRepository
 
     public async Task<bool> ConfirmReservationAsync(Reservation reservation, UserReservation user)
     {
-        reservation.ConfirmReservation();
+        reservation.ConfirmReservation(paymentService);
         await ctx.UserReservations.AddAsync(user);
         return await ChangeDatabaseAsync();
     }

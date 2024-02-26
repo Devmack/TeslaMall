@@ -13,6 +13,7 @@ public static class DalExtensionsContainer
         services.AddDbContext<TeslaMallContext>();
         services.AddTransient<IReservationRepository, ReservationRepository>();
         services.AddScoped<IRentCalculatorService, RentCalculatorServices>();
+        services.AddScoped<IPaymentGateService, PaymentGateService>();  
         services.AddScoped<IlocationRepository, LocationRepository>();
     }
 }

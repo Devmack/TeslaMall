@@ -10,7 +10,7 @@ public sealed class Reservation : BaseModel
     public ReservationPeriod ReservationPeriod { get; set; }
     public float ReservationCosts { get; set; }
     public bool IsReservationConfirmed { get; private set; }
-    public bool IsReservationPaid { get; private set; }
+    public bool IsReservationPaid { get;  set; }
 
     public Guid? UserReservationId { get; set; }
     public UserReservation? UserReservation { get; set; }
@@ -27,10 +27,10 @@ public sealed class Reservation : BaseModel
         ReservationPeriod = reservationPeriod;
     }
 
-    public void ConfirmReservation()
+    public void ConfirmReservation(IPaymentGateService paymentGateService)
     {   
         IsReservationConfirmed = true;
-        IsReservationPaid = true;
+        paymentGateService.Pay(this);
         RentedCar.CurrentCarStatus = CarStatus.RENTED;
     }
 
