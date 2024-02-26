@@ -23,10 +23,9 @@ function ManageRentPage() {
             if (data !== undefined) {
                 setIsAuthenticated(true);
                 setReservation(data);
-                console.log(reservation);
             }
         } catch (error) {
-            alert('Invalid credentials');
+            alert('Invalid credentials or rent under this email does not exists!');
         }
     };
 

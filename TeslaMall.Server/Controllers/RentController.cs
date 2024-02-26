@@ -104,5 +104,21 @@ namespace TeslaMall.Server.Controllers
 
         }
 
+        [HttpDelete]
+        [Route("/Remove/Reservation")]
+        [ProducesResponseType(typeof(string), 200)]
+        [ProducesResponseType(typeof(string), 503)]
+        public async Task<ActionResult<bool>> DeleteReservation([FromQuery] Guid id)
+        {
+            var fetchedReservation = await reservationRepository.GetSingleAsync(id);
+            if (fetchedReservation.UserReservationId != null) { throw new Exception("Cannot delete assigned reservation to user"); }
+            fetchedReservation.CancelReservation();
+            await reservationRepository.UpdateAsync(fetchedReservation);
+            await reservationRepository.RemoveAsync(fetchedReservation);
+
+            return Ok(true);
+
+        }
+
     }
 }

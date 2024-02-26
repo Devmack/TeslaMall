@@ -38,6 +38,15 @@ export const CancelReservation = async (reservationData) => {
     }
 };
 
+export const RemoveReservation = async (id) => {
+    try {
+        const response = await axios.delete(`${API_URL}/Remove/Reservation?id=${id}`);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+
 export const RentExists = async (email) => {
     try {
         const response = await axios.get(`${API_URL}/Rent/${email}/exists`);

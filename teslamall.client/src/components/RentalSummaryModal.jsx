@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Modal, Box, Typography, Button, TextField, CircularProgress } from '@mui/material';
-import { CreateReservation, ConfirmReservation } from '../services/RentalAPI';
+import { CreateReservation, ConfirmReservation, RemoveReservation } from '../services/RentalAPI';
 import { useNavigate } from "react-router-dom";
 
 function RentalSummaryModal({ isOpen, onClose, carName, rentalDuration, rentalCost, start, end, email }) {
@@ -10,12 +10,13 @@ function RentalSummaryModal({ isOpen, onClose, carName, rentalDuration, rentalCo
     const [isPaying, setIsPaying] = useState(false);
     const [paymentMessage, setPaymentMessage] = useState('');
     const [isPaymentSuccessful, setIsPaymentSuccessful] = useState(false);
+    const [showRejectConfirmation, setShowRejectConfirmation] = useState(false);
     const navigate = useNavigate();
     const [currentKeyId, setCurrentKeyId] = useState();
 
     useEffect(() => {
         setCurrentKeyId(uuidv4())
-    }, []);  
+    }, []);
 
     function uuidv4() {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
@@ -57,6 +58,24 @@ function RentalSummaryModal({ isOpen, onClose, carName, rentalDuration, rentalCo
             console.error('Error confirming rental:', error);
             setIsPaying(false);
             setPaymentMessage('Payment failed. Please try again.');
+        }
+    };
+
+    const handleReject = () => {
+        if (isConfirmed) {
+            setShowRejectConfirmation(true);
+        } else {
+            onClose();
+        }
+    };
+
+    const handleRejectConfirmation = async (confirmed) => {
+        if (confirmed) {
+            const data = await RemoveReservation(currentKeyId);
+            console.log("Reservation deleted");
+            onClose();
+        } else {
+            setShowRejectConfirmation(false);
         }
     };
 
@@ -139,8 +158,8 @@ function RentalSummaryModal({ isOpen, onClose, carName, rentalDuration, rentalCo
                                 ) : (
                                     <Button
                                         variant="contained"
-                                                    color="primary"
-                                                    onClick={() => { navigate('/'); }}
+                                        color="primary"
+                                        onClick={() => { navigate('/'); }}
                                         sx={{ mt: 2 }}
                                     >
                                         Return to Main Page
@@ -151,8 +170,51 @@ function RentalSummaryModal({ isOpen, onClose, carName, rentalDuration, rentalCo
                         )}
                     </>
                 )}
-                <Button variant="contained" color="secondary" onClick={onClose} sx={{ mt: 2, ml: 2 }}>
+                <Button variant="contained" color="secondary" onClick={handleReject} sx={{ mt: 2, ml: 2 }}>
                     Reject
+                </Button>
+                <RejectConfirmationDialog
+                    isOpen={showRejectConfirmation}
+                    onClose={handleRejectConfirmation}
+                />
+            </Box>
+        </Modal>
+    );
+}
+
+function RejectConfirmationDialog({ isOpen, onClose }) {
+    return (
+        <Modal
+            open={isOpen}
+            onClose={() => onClose(false)}
+            aria-labelledby="reject-confirmation-modal-title"
+            aria-describedby="reject-confirmation-modal-description"
+        >
+            <Box
+                sx={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    bgcolor: 'background.paper',
+                    boxShadow: 24,
+                    p: 4,
+                    minWidth: 300,
+                    maxWidth: 600,
+                    textAlign: 'center'
+                }}
+            >
+                <Typography id="reject-confirmation-modal-title" variant="h5" gutterBottom>
+                    Confirmation
+                </Typography>
+                <Typography id="reject-confirmation-modal-description" variant="body1" gutterBottom>
+                    You are resigning after confirmation. Initial reservation will be deleted. Do you wish to proceed?
+                </Typography>
+                <Button variant="contained" color="primary" onClick={() => onClose(true)} sx={{ mt: 2 }}>
+                    Yes
+                </Button>
+                <Button variant="contained" color="secondary" onClick={() => onClose(false)} sx={{ mt: 2, ml: 2 }}>
+                    No
                 </Button>
             </Box>
         </Modal>
