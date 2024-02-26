@@ -9,10 +9,11 @@ I used template to store backend .net api and react + vite at one solution, quic
 Persistency is based on ORM - ef core and it requires MSSQL server to apply migration (forced to do at start) and seed with demo data
 
 ## DevLog 
-**important!** **To cancel reservation for given email enter "1234"  as a code**. It is simple system to prevent anyone who knows your adress to see and cancel your rented car. 
+**important!** **To cancel reservation for any reservation email enter "1234"  as a code (its hardcoded value, that can be replaced later on with some custom solution)**. It is simple system to prevent anyone who knows your adress to see and cancel your rented car. 
+Payment gate is simplest possible stub - to pay enter any value. Later on it can be replaced with custom payment gate 
 
 1. Reservations period has limit to prevent booking for abstract time range (ex. 10000 years)
-2. Reservations first is confirmed, later on paid.
+2. Reservations first is confirmed, later on paid - I programmed user path that between confirmation and payment there is no "time in-between" either you pay or reject. 
 4. I've decided to go with persistency layer using entity framework (code first approach) with msssql 
 5. Access to data is done via repository design pattern to enable easy data source switching (ex. from mssql to mongo) 
 6. Custom dependencies within DI Container were moved to dedicated extension methods to clean up program.cs structure
