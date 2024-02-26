@@ -8,7 +8,7 @@ I used template to store backend .net api and react + vite at one solution, quic
 
 Persistency is based on ORM - ef core and it requires MSSQL server to apply migration (forced to do at start) and seed with demo data
 
-## DevLog 
+## DevLog - not chronological 
 **important!** **To cancel reservation for any reservation email enter "1234"  as a code (its hardcoded value, that can be replaced later on with some custom solution)**. It is simple system to prevent anyone who knows your adress to see and cancel your rented car. 
 Payment gate is simplest possible stub - to pay enter any value. Later on it can be replaced with custom payment gate 
 
@@ -27,3 +27,8 @@ Payment gate is simplest possible stub - to pay enter any value. Later on it can
 14. I've decided that there can be only one reservation per email. Multiple reservation would engage more redundant logic.
 15. Reservations cannot be done with dates inverted (end earlier than start) 
 16. Reservations cannot be done with retroactive dates
+17. Introduced payment abstraction to demonstrate idea of inserting different payment gate implementation 
+
+
+I hope you guys enjoyed the program! Looking forward to hearing from you
+Dominik
