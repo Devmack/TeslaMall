@@ -139,6 +139,7 @@ function ReservationPage(props) {
                                             className="form-control"
                                             placeholderText="Start Date"
                                             onCalendarClose={handleCalendarClose}
+                                            minDate={new Date()}
                                         />
                                         <DatePicker
                                             selected={endDate}
@@ -147,6 +148,7 @@ function ReservationPage(props) {
                                             className="form-control"
                                             placeholderText="End Date"
                                             onCalendarClose={handleCalendarClose}
+                                            minDate={startDate || new Date()}
                                         />
                                     </Grid>
                                     <Divider variant="middle" style={{ margin: '20px 0' }} />

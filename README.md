@@ -26,3 +26,4 @@ Payment gate is simplest possible stub - to pay enter any value. Later on it can
 13. Rental process lock. User cannot rent already rented car. 
 14. I've decided that there can be only one reservation per email. Multiple reservation would engage more redundant logic.
 15. Reservations cannot be done with dates inverted (end earlier than start) 
+16. Reservations cannot be done with retroactive dates
