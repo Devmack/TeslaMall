@@ -74,6 +74,7 @@ function RentalSummaryModal({ isOpen, onClose, carName, rentalDuration, rentalCo
             const data = await RemoveReservation(currentKeyId);
             console.log("Reservation deleted");
             onClose();
+            navigate('/');
         } else {
             setShowRejectConfirmation(false);
         }
