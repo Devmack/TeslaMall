@@ -5,6 +5,7 @@ namespace TeslaMall.Server.DTO.Models.ReservationPeriod;
 
 public record ReservationPeriodDTO : BaseDTO
 {
+    [Required(ErrorMessage = "Reservation id is required")]
     public Guid RelatedReservationId { get; init; }
 
     [Required(ErrorMessage = "Reservation start date is required")]
