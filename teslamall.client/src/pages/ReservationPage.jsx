@@ -36,6 +36,7 @@ function ReservationPage(props) {
     const [summaryModal, setsummaryModal] = useState(false);
     const [reservationDuration, setReservationDuration] = useState(0);
     const [lockEmail, setLockEmail] = useState(false);
+    const [errorMessage, setErrorMessage] = useState();
 
     const handleStartDateChange = (date) => {
         setStartDate(date);
@@ -73,8 +74,14 @@ function ReservationPage(props) {
     };
 
     const handleEmailChange = (event) => {
-        setEmail(event.target.value);
-        
+        const enteredEmail = event.target.value;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const isValidEmail = emailRegex.test(enteredEmail);
+        setEmail(enteredEmail);
+        if (!isValidEmail) {
+            setErrorMessage("Email should have proper format!");
+        }
+        setLockEmail(!isValidEmail);
     };
 
     const handleSubmit = async (event) => {
@@ -83,6 +90,7 @@ function ReservationPage(props) {
             const response = await RentExists(email);
             if (response == true) {
                 setLockEmail(true);
+                setErrorMessage("Reservation under this adress already exists!");
             } else {
                 setLockEmail(false);
                 setsummaryModal(true);
@@ -157,7 +165,7 @@ function ReservationPage(props) {
                                         {!lockEmail ? (<Button variant="contained" color="primary" type="submit">
                                             Submit
                                         </Button>) :
-                                            <p>Reservation on this email already exists!</p>}
+                                            <p>{errorMessage}</p>}
                                         
                                     </Grid>
                                 </Grid>
